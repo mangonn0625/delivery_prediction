@@ -24,18 +24,18 @@ except FileNotFoundError:
     st.error("⚠️ 같은 폴더에 'Train.csv' 파일이 없습니다. 파일을 확인해 주세요.")
     st.stop()
 
-# 3차시 분량 탭 구성
+# 상단 탭 메뉴 구성
 tab1, tab2, tab3 = st.tabs([
-    "📊 1차시: 데이터 탐색 및 시각화",
-    "🤖 2차시: 머신러닝 모델 학습 및 평가",
-    "🚀 3차시: 실시간 배송 지연 예측"
+    "📊 데이터 탐색 및 시각화",
+    "🤖 모델 학습 및 평가",
+    "🚀 실시간 배송 지연 예측"
 ])
 
 # ==========================================
-# 1차시: 데이터 탐색 및 시각화
+# 1. 데이터 탐색 및 시각화
 # ==========================================
 with tab1:
-    st.header("1차시: 데이터 확인 및 시각화")
+    st.header("데이터 확인 및 시각화")
     st.write(f"전체 데이터 크기: **{df.shape[0]}행 × {df.shape[1]}열**")
     
     st.subheader("1) 데이터 미리보기")
@@ -64,7 +64,7 @@ with tab1:
         st.pyplot(fig2)
 
 # ==========================================
-# 2차시: 머신러닝 모델 학습 및 평가
+# 2. 머신러닝 모델 학습 및 평가
 # ==========================================
 df_encoded = pd.get_dummies(df, drop_first=True)
 X = df_encoded.drop(columns=["Reached.on.Time_Y.N"])
@@ -83,7 +83,7 @@ def train_model(X_tr, y_tr):
 model = train_model(X_train, y_train)
 
 with tab2:
-    st.header("2차시: 분류 모델 학습 및 성능 평가")
+    st.header("분류 모델 학습 및 성능 평가")
     st.write("사용 모델: **랜덤 포레스트 분류기 (RandomForestClassifier)**")
     
     y_pred = model.predict(X_test)
@@ -99,10 +99,10 @@ with tab2:
     st.pyplot(fig3)
 
 # ==========================================
-# 3차시: 실시간 배송 지연 예측 웹 앱
+# 3. 실시간 배송 지연 예측 웹 앱
 # ==========================================
 with tab3:
-    st.header("3차시: 주문 조건 입력 및 지연 여부 예측")
+    st.header("주문 조건 입력 및 지연 여부 예측")
     st.write("아래에 주문 정보를 입력한 뒤 예측 버튼을 눌러보세요.")
     
     c1, c2, c3 = st.columns(3)
